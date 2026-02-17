@@ -1,0 +1,58 @@
+{
+  "name": "aria-interface-system",
+  "version": "1.0.0",
+  "description": "ARIA - Sistema modular de avatar con IA (Tipo LEGO)",
+  "main": "aria-data/backend/core/index.js",
+  "scripts": {
+    "start": "node aria-data/backend/core/index.js",
+    "start:core": "node scripts/activate-piece.js core",
+    "start:frontend": "node scripts/activate-piece.js frontend",
+    "start:ai-engine": "node scripts/activate-piece.js ai-engine",
+    
+    "activate:level1": "node scripts/activate-level.js 1",
+    "activate:level2": "node scripts/activate-level.js 2",
+    "activate:level3": "node scripts/activate-level.js 3",
+    "activate:level4": "node scripts/activate-level.js 4",
+    "activate:level5": "node scripts/activate-level.js 5",
+    "activate:level6": "node scripts/activate-level.js 6",
+    "activate:full": "node scripts/activate-level.js 7",
+    "activate:auto": "node scripts/activate-auto.js",
+    
+    "status": "node scripts/system-status.js",
+    "status:pieces": "node scripts/list-pieces.js",
+    "missing": "node scripts/missing-pieces.js",
+    "health": "node scripts/health-check.js",
+    
+    "verify:piece": "node scripts/verify-piece.js",
+    "connect:piece": "node scripts/connect-piece.js",
+    "activate:piece": "node scripts/activate-piece.js",
+    "test:piece": "node scripts/test-piece.js",
+    
+    "list:pieces": "node scripts/list-pieces.js",
+    "logs:watch": "tail -f logs/system.log",
+    "restart": "npm run stop && npm run start",
+    "stop": "pkill -f 'node aria-data'"
+  },
+  "keywords": [
+    "aria",
+    "avatar",
+    "ai",
+    "personality",
+    "memories",
+    "modular",
+    "lego"
+  ],
+  "author": "ARIA Interface Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.0.3",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,217 @@
+# ARIA Interface - Git Ignore Configuration
+# Optimizado para manejo de 1TB de datos
+
+# ============================================
+# STAGING AREA (Archivos temporales)
+# ============================================
+upload-staging/
+temp-upload/
+.staging/
+*.tmp
+*.temp
+
+# ============================================
+# NODE MODULES Y DEPENDENCIAS
+# ============================================
+node_modules/
+bower_components/
+jspm_packages/
+vendor/
+packages/
+
+# ============================================
+# BUILD OUTPUTS
+# ============================================
+/dist
+/build
+/out
+/.next
+/.nuxt
+/.vuepress/dist
+/.cache
+/public/build
+
+# ============================================
+# ARCHIVOS GRANDES (>100MB)
+# Estos deben ir a Git LFS o Cloud
+# ============================================
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Videos
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.webm
+
+# Modelos de IA grandes
+*.pt
+*.pth
+*.onnx
+*.h5
+*.pb
+*.pkl
+*.pickle
+*.model
+
+# Bases de datos
+*.db
+*.sqlite
+*.sqlite3
+*.sql.gz
+
+# Imágenes grandes o múltiples
+*.psd
+*.ai
+*.sketch
+
+# ============================================
+# CLOUD STORAGE REFERENCES
+# Solo guardamos los manifests, no los archivos
+# ============================================
+aria-data/frontend/assets/media/
+aria-data/ai-models/weights/
+aria-data/memories/media/
+aria-data/memories/embeddings/
+
+# ============================================
+# ARCHIVOS DE SISTEMA
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# IDEs Y EDITORES
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# ============================================
+# LOGS
+# ============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ============================================
+# ENVIRONMENT Y SECRETS
+# ============================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+*.key
+*.pem
+secrets/
+credentials/
+
+# ============================================
+# TESTING
+# ============================================
+coverage/
+*.coverage
+.nyc_output/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ============================================
+# BACKUPS
+# ============================================
+*.bak
+*.backup
+*.old
+*~
+
+# ============================================
+# OPERATING SYSTEM FILES
+# ============================================
+# Windows
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.AppleDouble
+.LSOverride
+Icon
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+.directory
+.Trash-*
+
+# ============================================
+# PACKAGE MANAGERS
+# ============================================
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+composer.lock
+
+# ============================================
+# ESPECÍFICO ARIA
+# ============================================
+# Área de procesamiento temporal
+/aria-processing/
+/aria-temp/
+
+# Datos sin procesar (raw)
+/aria-data-raw/
+
+# Exports temporales
+/exports/
+/downloads/
+
+# Cache de embeddings locales
+/embeddings-cache/
+
+# Modelos descargados temporalmente
+/models-cache/
+
+# ============================================
+# MANTENER ESTOS ARCHIVOS
+# ============================================
+# Manifests y referencias (SÍ incluir en Git)
+!aria-media-refs/*.manifest.json
+!aria-data/ai-models/configs/*.json
+!aria-data/memories/*/metadata.json
+
+# Documentación siempre incluida
+!docs/**
+!*.md
+!README.md

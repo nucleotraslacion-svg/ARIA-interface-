@@ -1,0 +1,199 @@
+{
+  "system_info": {
+    "name": "ARIA Interface",
+    "version": "1.0.0",
+    "architecture": "Modular LEGO-style",
+    "total_pieces": 7,
+    "activation_levels": 7
+  },
+  
+  "pieces": {
+    "core": {
+      "id": 1,
+      "name": "CORE",
+      "priority": 5,
+      "size_mb": 100,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-data/backend/core/",
+      "dependencies": [],
+      "provides": [
+        "system_boot",
+        "module_loader",
+        "configuration",
+        "logging",
+        "health_check"
+      ]
+    },
+    
+    "frontend": {
+      "id": 2,
+      "name": "FRONTEND",
+      "priority": 5,
+      "size_mb": 50,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-data/frontend/",
+      "dependencies": ["core"],
+      "provides": [
+        "ui_interface",
+        "navigation",
+        "forms",
+        "dashboard"
+      ]
+    },
+    
+    "database": {
+      "id": 3,
+      "name": "DATABASE",
+      "priority": 4,
+      "size_mb": 50,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-data/database/",
+      "dependencies": ["core"],
+      "provides": [
+        "data_persistence",
+        "user_management",
+        "conversation_history",
+        "permissions"
+      ]
+    },
+    
+    "ai_engine": {
+      "id": 4,
+      "name": "AI-ENGINE",
+      "priority": 4,
+      "size_mb": 5,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-data/ai-models/",
+      "dependencies": ["core", "database"],
+      "provides": [
+        "llm_integration",
+        "chat_generation",
+        "embeddings",
+        "rag_search"
+      ]
+    },
+    
+    "personality": {
+      "id": 5,
+      "name": "PERSONALITY",
+      "priority": 4,
+      "size_mb": 10,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-data/personalities/",
+      "dependencies": ["ai_engine"],
+      "provides": [
+        "personality_profiles",
+        "voice_style",
+        "emotional_responses",
+        "consistency"
+      ]
+    },
+    
+    "memories": {
+      "id": 6,
+      "name": "MEMORIES",
+      "priority": 3,
+      "size_mb": 1000,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-data/memories/",
+      "dependencies": ["database", "ai_engine"],
+      "provides": [
+        "episodic_memory",
+        "semantic_knowledge",
+        "context_retrieval",
+        "experience_based_responses"
+      ]
+    },
+    
+    "media": {
+      "id": 7,
+      "name": "MEDIA",
+      "priority": 2,
+      "size_mb": 500000,
+      "status": "not_loaded",
+      "active": false,
+      "health": "unknown",
+      "path": "aria-media-refs/",
+      "dependencies": ["database"],
+      "provides": [
+        "images",
+        "videos",
+        "audio",
+        "documents",
+        "rich_content"
+      ]
+    }
+  },
+  
+  "activation_levels": {
+    "level_0": {
+      "name": "Inactive",
+      "functionality": "0%",
+      "required_pieces": [],
+      "description": "Sistema apagado"
+    },
+    "level_1": {
+      "name": "Boot",
+      "functionality": "10%",
+      "required_pieces": ["core"],
+      "description": "Sistema arranca, muestra estado"
+    },
+    "level_2": {
+      "name": "Interface",
+      "functionality": "25%",
+      "required_pieces": ["core", "frontend"],
+      "description": "Interfaz visual funcional"
+    },
+    "level_3": {
+      "name": "Storage",
+      "functionality": "40%",
+      "required_pieces": ["core", "frontend", "database"],
+      "description": "Con almacenamiento persistente"
+    },
+    "level_4": {
+      "name": "Intelligence",
+      "functionality": "70%",
+      "required_pieces": ["core", "frontend", "database", "ai_engine"],
+      "description": "Chat con IA funcional"
+    },
+    "level_5": {
+      "name": "Personalized",
+      "functionality": "85%",
+      "required_pieces": ["core", "frontend", "database", "ai_engine", "personality"],
+      "description": "Avatar con personalidad única"
+    },
+    "level_6": {
+      "name": "Contextual",
+      "functionality": "95%",
+      "required_pieces": ["core", "frontend", "database", "ai_engine", "personality", "memories"],
+      "description": "Respuestas con experiencias personales"
+    },
+    "level_7": {
+      "name": "Complete",
+      "functionality": "100%",
+      "required_pieces": ["core", "frontend", "database", "ai_engine", "personality", "memories", "media"],
+      "description": "Sistema completo con multimedia"
+    }
+  },
+  
+  "current_state": {
+    "last_updated": "2026-02-17T10:00:00Z",
+    "activation_level": 0,
+    "loaded_pieces": [],
+    "active_pieces": [],
+    "total_size_mb": 0,
+    "functionality_percent": 0
+  }
+}
