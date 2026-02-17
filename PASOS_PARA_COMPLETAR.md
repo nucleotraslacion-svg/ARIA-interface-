@@ -1,4 +1,4 @@
-# Pasos para Completar el Código del Agente Artificial
+# Pasos para completar el código del agente artificial
 
 ## Estado Actual
 - ✅ HTML válido y estructuralmente correcto
