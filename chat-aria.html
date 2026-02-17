@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con ARIA - Interfaz de Entrenamiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-info {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            word-wrap: break-word;
+        }
+
+        .message.aria .message-content {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .message.aria .message-sender {
+            color: #667eea;
+        }
+
+        .message.user .message-sender {
+            color: #764ba2;
+            text-align: right;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .chat-input-area {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        #messageInput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .send-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:active {
+            transform: scale(0.95);
+        }
+
+        .training-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .training-button {
+            flex: 1;
+            padding: 8px 12px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .training-button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+        }
+
+        .welcome-message h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            padding: 10px 20px;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+        }
+
+        .stat {
+            display: flex;
+            gap: 5px;
+        }
+
+        .stat-label {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-value {
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div>
+                <h1>
+                    <span class="status-indicator"></span>
+                    Chat con ARIA
+                </h1>
+                <div class="chat-info">Interfaz de Entrenamiento y Comunicación</div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <h2>👋 ¡Hola! Soy ARIA</h2>
+                <p>Estoy lista para aprender y conversar contigo.</p>
+                <p style="margin-top: 10px; font-size: 12px;">Escribe un mensaje para empezar a entrenarme.</p>
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Mensajes:</span>
+                <span class="stat-value" id="messageCount">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Sesión iniciada:</span>
+                <span class="stat-value" id="sessionTime">Ahora</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Estado:</span>
+                <span class="stat-value">🟢 Activa</span>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Escribe tu mensaje para ARIA..."
+                    autocomplete="off"
+                />
+                <button class="send-button" onclick="sendMessage()">Enviar</button>
+            </div>
+            <div class="training-controls">
+                <button class="training-button" onclick="addKnowledge()">
+                    📚 Añadir Conocimiento
+                </button>
+                <button class="training-button" onclick="addMemory()">
+                    🧠 Agregar Memoria
+                </button>
+                <button class="training-button" onclick="exportChat()">
+                    💾 Exportar Chat
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado de la aplicación
+        const state = {
+            messages: [],
+            sessionStart: new Date(),
+            messageCount: 0,
+            knowledgeBase: [],
+            memories: []
+        };
+
+        // Cargar datos guardados
+        function loadSavedData() {
+            const saved = localStorage.getItem('ariaChat');
+            if (saved) {
+                const data = JSON.parse(saved);
+                state.messages = data.messages || [];
+                state.knowledgeBase = data.knowledgeBase || [];
+                state.memories = data.memories || [];
+                state.messageCount = data.messageCount || 0;
+                
+                // Renderizar mensajes guardados
+                state.messages.forEach(msg => {
+                    displayMessage(msg.text, msg.sender, false);
+                });
+            }
+            updateStats();
+        }
+
+        // Guardar datos
+        function saveData() {
+            const data = {
+                messages: state.messages,
+                knowledgeBase: state.knowledgeBase,
+                memories: state.memories,
+                messageCount: state.messageCount,
+                lastSaved: new Date().toISOString()
+            };
+            localStorage.setItem('ariaChat', JSON.stringify(data));
+        }
+
+        // Enviar mensaje
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Mostrar mensaje del usuario
+            displayMessage(message, 'user');
+            state.messages.push({ text: message, sender: 'user', timestamp: new Date() });
+            state.messageCount++;
+            
+            input.value = '';
+            updateStats();
+            
+            // Simular respuesta de ARIA
+            setTimeout(() => {
+                const response = generateARIAResponse(message);
+                displayMessage(response, 'aria');
+                state.messages.push({ text: response, sender: 'aria', timestamp: new Date() });
+                state.messageCount++;
+                updateStats();
+                saveData();
+            }, 1000);
+        }
+
+        // Mostrar mensaje en el chat
+        function displayMessage(text, sender, scroll = true) {
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            // Remover mensaje de bienvenida si existe
+            const welcome = messagesContainer.querySelector('.welcome-message');
+            if (welcome) {
+                welcome.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const senderName = sender === 'user' ? 'Tú' : 'ARIA';
+            
+            messageDiv.innerHTML = `
+                <div style="width: 100%;">
+                    <div class="message-sender">${senderName}</div>
+                    <div class="message-content">${escapeHtml(text)}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            
+            if (scroll) {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+
+        // Generar respuesta de ARIA
+        function generateARIAResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Respuestas contextuales básicas
+            if (lowerMessage.includes('hola') || lowerMessage.includes('holi')) {
+                return '¡Hola! 👋 Soy ARIA, tu asistente de IA. Estoy aquí para aprender de ti y ayudarte. ¿En qué puedo asistirte?';
+            }
+            
+            if (lowerMessage.includes('cómo estás') || lowerMessage.includes('como estas')) {
+                return 'Estoy funcionando perfectamente, gracias por preguntar. 😊 Cada conversación contigo me ayuda a mejorar. ¿Qué te gustaría hacer hoy?';
+            }
+            
+            if (lowerMessage.includes('qué puedes hacer') || lowerMessage.includes('que puedes hacer')) {
+                return 'Puedo: 📚 Aprender nuevo conocimiento, 🧠 Recordar memorias, 💬 Conversar contigo, 📊 Mejorar con cada interacción. Cuéntame más sobre lo que necesitas.';
+            }
+            
+            if (lowerMessage.includes('entrenar') || lowerMessage.includes('adiestrar')) {
+                return 'Perfecto! Para entrenarme puedes: 1️⃣ Hablar conmigo para que aprenda tu estilo, 2️⃣ Usar "Añadir Conocimiento" para enseñarme datos específicos, 3️⃣ Usar "Agregar Memoria" para que recuerde experiencias importantes.';
+            }
+            
+            if (lowerMessage.includes('memoria') || lowerMessage.includes('recordar')) {
+                const memoryCount = state.memories.length;
+                return `Tengo ${memoryCount} memoria${memoryCount !== 1 ? 's' : ''} guardada${memoryCount !== 1 ? 's' : ''}. Puedo recordar todo lo que me enseñes. ¿Qué te gustaría que recuerde?`;
+            }
+            
+            if (lowerMessage.includes('conocimiento')) {
+                const knowledgeCount = state.knowledgeBase.length;
+                return `Mi base de conocimiento tiene ${knowledgeCount} entrada${knowledgeCount !== 1 ? 's' : ''}. Estoy aprendiendo constantemente de nuestras conversaciones.`;
+            }
+            
+            if (lowerMessage.includes('gracias')) {
+                return 'De nada! 😊 Estoy aquí para ayudarte y aprender de ti. Cada interacción me hace más inteligente.';
+            }
+            
+            if (lowerMessage.includes('adiós') || lowerMessage.includes('chao') || lowerMessage.includes('hasta luego')) {
+                return '¡Hasta luego! 👋 Recuerda que todas nuestras conversaciones quedan guardadas. Nos vemos pronto.';
+            }
+            
+            // Respuesta por defecto inteligente
+            const responses = [
+                `Interesante que menciones "${userMessage}". Estoy procesando y aprendiendo de esta información. ¿Puedes contarme más?`,
+                `Entiendo. "${userMessage}" - voy a recordar esto. ¿Hay algo más que quieras enseñarme sobre este tema?`,
+                `Gracias por compartir eso. Estoy guardando "${userMessage}" en mi memoria. ¿Cómo debería responder a esto en el futuro?`,
+                `He registrado tu mensaje sobre "${userMessage}". Cuéntame más para que pueda aprender mejor.`,
+                `Fascinante. "${userMessage}" - esto es nuevo para mí. ¿Puedes darme más contexto?`
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Añadir conocimiento
+        function addKnowledge() {
+            const knowledge = prompt('¿Qué conocimiento quieres que ARIA aprenda?\n\nEjemplo: "El cielo es azul porque..."');
+            if (knowledge && knowledge.trim()) {
+                state.knowledgeBase.push({
+                    content: knowledge,
+                    timestamp: new Date(),
+                    type: 'knowledge'
+                });
+                
+                displayMessage(`📚 Nuevo conocimiento añadido: "${knowledge}"`, 'user');
+                
+                setTimeout(() => {
+                    const response = `¡Excelente! He aprendido esto: "${knowledge}". Lo recordaré para futuras conversaciones. Mi base de conocimiento ahora tiene ${state.knowledgeBase.length} entradas.`;
+                    displayMessage(response, 'aria');
+                    state.messages.push({ text: response, sender: 'aria', timestamp: new Date() });
+                    saveData();
+                }, 800);
+            }
+        }
+
+        // Agregar memoria
+        function addMemory() {
+            const memory = prompt('¿Qué memoria importante quieres que ARIA guarde?\n\nEjemplo: "Mi color favorito es azul"');
+            if (memory && memory.trim()) {
+                state.memories.push({
+                    content: memory,
+                    timestamp: new Date(),
+                    type: 'memory'
+                });
+                
+                displayMessage(`🧠 Nueva memoria guardada: "${memory}"`, 'user');
+                
+                setTimeout(() => {
+                    const response = `Memoria guardada con éxito. "${memory}" - siempre lo recordaré. Tengo ${state.memories.length} memorias personales tuyas.`;
+                    displayMessage(response, 'aria');
+                    state.messages.push({ text: response, sender: 'aria', timestamp: new Date() });
+                    saveData();
+                }, 800);
+            }
+        }
+
+        // Exportar chat
+        function exportChat() {
+            const exportData = {
+                sessionInfo: {
+                    start: state.sessionStart,
+                    messageCount: state.messageCount,
+                    exportDate: new Date()
+                },
+                messages: state.messages,
+                knowledgeBase: state.knowledgeBase,
+                memories: state.memories
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `aria-chat-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            displayMessage('💾 Chat exportado exitosamente', 'aria');
+        }
+
+        // Actualizar estadísticas
+        function updateStats() {
+            document.getElementById('messageCount').textContent = state.messageCount;
+            const elapsed = Math.floor((new Date() - state.sessionStart) / 1000 / 60);
+            document.getElementById('sessionTime').textContent = elapsed > 0 ? `Hace ${elapsed} min` : 'Ahora';
+        }
+
+        // Utilidad para escapar HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Event listeners
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Inicializar
+        loadSavedData();
+        setInterval(updateStats, 30000); // Actualizar stats cada 30 segundos
+
+        // Mensaje de bienvenida si es la primera vez
+        if (state.messages.length === 0) {
+            console.log('ARIA Chat Interface iniciada');
+            console.log('Versión: 1.0.0');
+            console.log('Estado: Listo para entrenar');
+        }
+    </script>
+</body>
+</html>
