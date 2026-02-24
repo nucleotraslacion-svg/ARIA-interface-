@@ -1,12 +1,435 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=Aqu%C3%AD%20estar%C3%A9%20vivo%20(1)%20(1).html" />
-  <title>Almabook - Legado Digital Interactivo</title>
-  <link rel="canonical" href="https://almabook.manus.space" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+
+  <!-- Primary Meta Tags -->
+  <title>Almabook - Legado Digital Interactivo | boggad.pro</title>
+  <meta name="title" content="Almabook - Legado Digital Interactivo | Siempre estaré aquí" />
+  <meta name="description" content="Almabook es tu espacio personal para preservar y compartir tu legado digital. Crea cápsulas de memoria interactivas con videos, fotos, audios y textos que tus seres queridos podrán consultar eternamente a través de nuestro chat con IA." />
+  <meta name="keywords" content="legado digital, memorias digitales, herederos digitales, chat con IA, vida eterna digital, inmortalidad digital, avatar digital, preservar recuerdos, cápsulas de memoria, testamento digital, herencia digital, memorias familiares" />
+  <meta name="author" content="Rubén Darío González" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#0066cc" />
+  <link rel="canonical" href="https://boggad.pro" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://boggad.pro/" />
+  <meta property="og:title" content="Almabook - Legado Digital Interactivo | Siempre estaré aquí" />
+  <meta property="og:description" content="Preserva tu historia, tu esencia y tus recuerdos más preciados para que tus seres queridos puedan conectar contigo eternamente a través de nuestro chat con IA." />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Almabook by boggad" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://boggad.pro/" />
+  <meta name="twitter:title" content="Almabook - Legado Digital Interactivo" />
+  <meta name="twitter:description" content="Crea tu legado digital interactivo con Almabook. Tu vida, tu historia, tu esencia, preservada para la eternidad." />
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Almabook",
+    "alternateName": "Almabook - Legado Digital Interactivo",
+    "url": "https://boggad.pro",
+    "description": "Plataforma de legado digital interactivo para preservar memorias y conectar con seres queridos a través de inteligencia artificial.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Rubén Darío González",
+      "email": "nucleotraslacion@gmail.com"
+    },
+    "featureList": [
+      "Cápsulas de memoria multimedia",
+      "Chat interactivo con IA",
+      "Sistema de herederos digitales",
+      "Avatar digital personalizado",
+      "Soporte multiidioma",
+      "Pagos seguros con Stripe y Visum"
+    ]
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es Almabook?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almabook es una plataforma de legado digital interactivo que te permite preservar tus memorias, historias y esencia para que tus seres queridos puedan conectar contigo eternamente a través de un chat con inteligencia artificial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo funciona el chat con IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El chat con IA de Almabook utiliza las memorias y contenido que has creado para generar respuestas personalizadas que reflejan tu personalidad, permitiendo a tus herederos mantener conversaciones significativas contigo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quiénes pueden acceder a mis memorias?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Solo los herederos que tú designes tendrán acceso a tus memorias. Puedes configurar diferentes niveles de acceso para cada heredero y decidir cuándo pueden acceder a tu legado digital."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0066cc;
+      --blue-dark: #004fa3;
+      --blue-light: #e8f0fb;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,102,204,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+    .logo span { color: var(--text); }
+    nav a.cta-btn {
+      background: var(--blue); color: var(--white);
+      padding: .5rem 1.2rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: .9rem;
+      transition: background .2s;
+    }
+    nav a.cta-btn:hover { background: var(--blue-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #e8f0fb 0%, #f0f4ff 60%, #fff 100%);
+      padding: 6rem 1.5rem 5rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--blue-light); color: var(--blue);
+      border: 1px solid #b3cdf7;
+      border-radius: 20px; padding: .3rem 1rem;
+      font-size: .85rem; font-weight: 600; margin-bottom: 1.5rem;
+      letter-spacing: .03em;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800; line-height: 1.15;
+      max-width: 800px; margin: 0 auto 1.25rem;
+    }
+    .hero h1 em { color: var(--blue); font-style: normal; }
+    .hero p {
+      font-size: 1.15rem; color: var(--muted);
+      max-width: 600px; margin: 0 auto 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: var(--white);
+      padding: .85rem 2rem; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(0,102,204,.35);
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--white); color: var(--blue);
+      padding: .85rem 2rem; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      border: 2px solid var(--blue);
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: var(--blue-light); }
+
+    /* ── FEATURES ── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      text-align: center; font-size: .85rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: .75rem;
+    }
+    h2 {
+      text-align: center; font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800; margin-bottom: 1rem;
+    }
+    .section-desc {
+      text-align: center; color: var(--muted); font-size: 1.05rem;
+      max-width: 560px; margin: 0 auto 3.5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--white); border: 1px solid #e5e7eb;
+      border-radius: var(--radius); padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,102,204,.14); }
+    .feature-icon {
+      width: 52px; height: 52px;
+      background: var(--blue-light); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; font-size: 1.6rem;
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    .feature-card p { color: var(--muted); font-size: .95rem; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--blue-light); }
+    .steps { display: flex; flex-direction: column; gap: 2rem; max-width: 700px; margin: 0 auto; }
+    .step { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .step-num {
+      min-width: 44px; height: 44px;
+      background: var(--blue); color: var(--white);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
+    .step p { color: var(--muted); font-size: .95rem; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    details {
+      background: var(--white); border: 1px solid #e5e7eb;
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      cursor: pointer;
+    }
+    details[open] { border-color: var(--blue); }
+    summary {
+      font-weight: 700; font-size: 1rem;
+      list-style: none; display: flex;
+      justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    summary::after { content: '+'; font-size: 1.4rem; color: var(--blue); flex-shrink: 0; }
+    details[open] summary::after { content: '−'; }
+    details p { margin-top: .75rem; color: var(--muted); font-size: .95rem; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--blue) 0%, #004fa3 100%);
+      color: var(--white); text-align: center;
+      padding: 5rem 1.5rem;
+    }
+    .cta-banner h2 { color: var(--white); margin-bottom: 1rem; }
+    .cta-banner p { opacity: .85; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2rem; }
+    .btn-white {
+      background: var(--white); color: var(--blue);
+      padding: .9rem 2.2rem; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      transition: opacity .2s;
+    }
+    .btn-white:hover { opacity: .9; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text); color: #9ca3af;
+      padding: 2.5rem 1.5rem; text-align: center;
+      font-size: .9rem;
+    }
+    footer a { color: #9ca3af; text-decoration: underline; }
+    footer strong { color: var(--white); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
+
 <body>
-  <p>Cargando... <a href="Aqu%C3%AD%20estar%C3%A9%20vivo%20(1)%20(1).html">Haz clic aquí si no eres redirigido automáticamente</a></p>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="/">Alma<span>book</span></a>
+      <a class="cta-btn" href="#comenzar">Comenzar gratis</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">✨ Legado Digital Interactivo</div>
+    <h1>Siempre estarás <em>aquí</em>,<br>para quienes más quieres</h1>
+    <p>
+      Preserva tus memorias, historias y esencia. Tus seres queridos
+      podrán conversar contigo eternamente a través de nuestro chat con IA.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#comenzar" id="comenzar">Crear mi legado digital</a>
+      <a class="btn-secondary" href="#como-funciona">Cómo funciona</a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section>
+    <div class="section-inner">
+      <p class="section-label">Funcionalidades</p>
+      <h2>Todo lo que necesitas para preservar tu legado</h2>
+      <p class="section-desc">
+        Almabook reúne las herramientas para que tu historia viva para siempre.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎞️</div>
+          <h3>Cápsulas de memoria multimedia</h3>
+          <p>Combina videos, fotos, audios y textos en cápsulas interactivas que cuentan tu historia.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>Chat interactivo con IA</h3>
+          <p>Tu IA aprende de tu contenido y responde como tú, permitiendo conversaciones auténticas.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👨‍👩‍👧</div>
+          <h3>Sistema de herederos digitales</h3>
+          <p>Designa quién puede acceder a tu legado y configura diferentes niveles de acceso.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🪞</div>
+          <h3>Avatar digital personalizado</h3>
+          <p>Crea un avatar que refleje tu apariencia y personalidad para interacciones visuales.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Soporte multiidioma</h3>
+          <p>Disponible en múltiples idiomas para que tu legado llegue a cualquier rincón del mundo.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Pagos seguros</h3>
+          <p>Transacciones protegidas con Stripe y Visum. Tu información siempre segura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="como-funciona">
+    <div class="section-inner">
+      <p class="section-label">Paso a paso</p>
+      <h2>Cómo funciona Almabook</h2>
+      <p class="section-desc">En tres pasos sencillos, tu legado estará vivo para siempre.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Crea tu perfil y sube tus memorias</h3>
+            <p>Sube fotos, videos, audios y escribe las historias que quieres preservar. Cuanto más compartas, más rica será tu presencia digital.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Entrena tu IA personal</h3>
+            <p>Nuestra IA aprende de todo tu contenido para generar respuestas que reflejen tu voz, valores y personalidad únicos.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Designa tus herederos digitales</h3>
+            <p>Elige quién podrá acceder a tu legado y conversar contigo. Tu presencia digital permanecerá viva para siempre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="section-inner">
+      <p class="section-label">Preguntas frecuentes</p>
+      <h2>¿Tienes dudas?</h2>
+      <p class="section-desc">Aquí respondemos las preguntas más comunes sobre Almabook.</p>
+      <div class="faq-list">
+        <details>
+          <summary>¿Qué es Almabook?</summary>
+          <p>Almabook es una plataforma de legado digital interactivo que te permite preservar tus memorias, historias y esencia para que tus seres queridos puedan conectar contigo eternamente a través de un chat con inteligencia artificial.</p>
+        </details>
+        <details>
+          <summary>¿Cómo funciona el chat con IA?</summary>
+          <p>El chat con IA de Almabook utiliza las memorias y contenido que has creado para generar respuestas personalizadas que reflejan tu personalidad, permitiendo a tus herederos mantener conversaciones significativas contigo.</p>
+        </details>
+        <details>
+          <summary>¿Quiénes pueden acceder a mis memorias?</summary>
+          <p>Solo los herederos que tú designes tendrán acceso a tus memorias. Puedes configurar diferentes niveles de acceso para cada heredero y decidir cuándo pueden acceder a tu legado digital.</p>
+        </details>
+        <details>
+          <summary>¿Mis datos están seguros?</summary>
+          <p>Sí. Toda tu información está cifrada y almacenada de forma segura. Solo tú y las personas que tú autorices tendrán acceso a tu legado digital.</p>
+        </details>
+        <details>
+          <summary>¿Puedo empezar gratis?</summary>
+          <p>Sí, puedes crear tu cuenta y comenzar a subir memorias de forma gratuita. Para funciones avanzadas como el chat con IA ilimitado y el avatar digital, ofrecemos planes de pago accesibles.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="section-inner">
+      <h2>Tu historia merece vivir para siempre</h2>
+      <p>Únete a miles de personas que ya están preservando su legado digital con Almabook.</p>
+      <a class="btn-white" href="mailto:nucleotraslacion@gmail.com">Contactar al equipo</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2025 <strong>boggad company</strong> &mdash; Almabook - Legado Digital Interactivo<br />
+      <a href="mailto:nucleotraslacion@gmail.com">nucleotraslacion@gmail.com</a>
+      &nbsp;·&nbsp; boggad.pro
+    </p>
+  </footer>
+
 </body>
 </html>
